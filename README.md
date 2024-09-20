@@ -17,7 +17,7 @@
 This [paper](https://arxiv.org/abs/2409.10699)  introduce a novel attention-free, state space model-based framework called CoMamba for V2X-based perception. CoMamba scales remarkably well, achieving linear-complexity costs in GFLOPs, latency, and GPU memory relative to the number of agents, while still maintaining excellent perception performance. 
 
 
-## [Project Page](https://jinlong17.github.io/CoMamba/)
+## [Project Page](https://taco-group.github.io/CoMamba/)
 <p align="center">
 <img src="docs/assets/Co_pipeline.png" width="800" alt="" class="img-responsive">
 </p>
