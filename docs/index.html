@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+
+
+<!-- === Header Starts === -->
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="google-site-verification" content="JWOue1ZxNWRUMycXffn9ST4zeYFgqa01tDaUz4tDkAY" />
+  <title>CoMamba</title>
+
+  <link href="./assets/bootstrap.min.css" rel="stylesheet">
+  <link href="./assets/font.css" rel="stylesheet" type="text/css">
+  <link href="./assets/style.css" rel="stylesheet" type="text/css">
+</head>
+<!-- === Header Ends === -->
+
+
+<body>
+<!-- === Home Section Starts === -->
+<div class="section">
+  <!-- === Title Starts === -->
+  <div class="header">
+    <div class="logo">
+      <a href="https://taco-group.github.io/index.html" target="_blank"><img src="./assets/Comamba_emoji.png"></a>
+    </div>
+    <div class="title", style="padding-top: 10pt;">  <!-- Set padding as 10 if title is with two lines. -->
+      <b>CoMamba</b>: Real-time Cooperative Perception Unlocked with State Space Models
+    </div>
+  </div>
+  <!-- === Title Ends === -->
+  <div class="author">
+    <a href="https://jinlong17.github.io/" target="_blank">Jinlong Li</a><sup>1</sup>,&nbsp
+    <a href="https://scholar.google.com/citations?user=fGK5P7IAAAAJ&hl=zh-CN" target="_blank">Xinyu Liu</a><sup>2</sup>,&nbsp
+    <a href="https://scholar.google.com/citations?user=d94_GW4AAAAJ&hl=en" target="_blank">Baolu Li</a><sup>2</sup>,&nbsp
+    <a href="https://derrickxunu.github.io/" target="_blank">Runsheng Xu</a><sup>3</sup>
+    <a href="https://jiachenli94.github.io/" target="_blank">Jiachen Li</a><sup>4</sup>,&nbsp <br>
+    <a href="https://scholar.google.com/citations?user=JnQts0kAAAAJ&hl=en" target="_blank">Hongkai Yu</a><sup>2</sup>
+    <a href="https://vztu.github.io/" target="_blank">Zhengzhong Tu</a><sup>1</sup>,&nbsp
+
+  </div>
+    
+  <div class="institution">
+    <sup>1</sup> Texas A&M University,
+    <sup>2</sup> Cleveland State University,
+    <sup>3</sup> UCLA,
+    <sup>4</sup> University of California, Riverside.
+  </div>
+
+  <!-- <div class="note">
+    * Equal contribution
+  </div> -->
+
+  <div class="link">
+    <b>ArVix 2024</b>&nbsp;
+    <a href="https://arxiv.org/abs/2409.10699" target="_blank">[Paper]</a>&nbsp;
+    <a href="https://github.com/taco-group/CoMamba" target="_blank">[Code]</a>
+  </div>
+  <div class="teaser">
+    <img src="assets/Co_Vis1.png">
+  </div>
+  CoMamba scales remarkably well, achieving linear-complexity costs in GFLOPs, latency, and GPU memory relative to the number of agents, while still maintaining excellent perception performance.
+</div>
+<!-- === Home Section Ends === -->
+
+
+
+
+
+
+<!-- === Overview Section Starts === -->
+<div class="section">
+  <div class="title">Overview</div>
+  <div class="body">
+    <em>This work explores the potential adoption of state space models for the challenging V2X/V2V cooperative perception task, which involves high-order, multimodal visual information fusion using LiDAR scans. </em>
+    We propose CoMamba, the first attempt to explore the potential of linear-complexity Mamba models for V2X cooperative perception. Our CoMamba is a novel V2X perception framework that efficiently models V2X feature interactions using state-space models. Notably, CoMamba scales linearly with the increasing number  of connected agents, whereas previous transformer models all suffer from quadratic complexity with respect to total data dimensionality.
+
+    <table width="100%" style="margin: 20pt 0; text-align: center;">
+      <tr>
+        <td><img src="assets/Co_pipeline.png" width="85%"></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="bodysmall">
+
+    Overview of our CoMamba V2X-based perception framework. (a) CoMamba V2X perception system involves V2X metadata sharing, LiDAR visual encoder, feature sharing, and CoMamba fusion network to conduct final prediction. (b) our CoMamba fusion network leverages the Cooperative 2D-Selective-Scan Module to effectively fuse the complex interactions present in high-resource-cost V2X data sequences. The Global-wise Pooling Module efficiently attains global information among the overlapping features of the CAVs.
+  </div>
+
+</div>
+<!-- === Overview Section Ends === -->
+
+
+
+
+<!-- === Overview Section Starts === -->
+<div class="section">
+  <div class="title">Cooperative 2D-Selective-Scan (CSS2D)</div>
+  <div class="body">
+    <!-- Illustration of the Cooperative 2D-Selective-Scan (CSS2D) process.  -->
+    The features of K CAVs are embedded into patches. These patches are then traversed along four different scanning paths, with each 1D sequence (KHW) independently  processed by distinct Mamba blocks in parallel. Afterward, the resulting outputs are reshaped and merged to form the 3D feature maps, which maintain the same dimensions as the input features. In this instance, we use K = 3 as an illustrative example.
+
+    <table width="100%" style="margin: 20pt 0; text-align: center;">
+      <tr>
+        <td><img src="assets/Co_SS2D.png" width="85%"></td>
+      </tr>
+    </table>
+  </div>
+
+</div>
+<!-- === Overview Section Ends === -->
+
+
+
+
+<!-- === Result Section Starts === -->
+<div class="section">
+  <div class="title">Qualitative Results</div>
+  <div class="body">
+    LiDAR-based 3D detection performance comparison. We show Average Precision (AP) at IoU=0.5 and 0.7 on four V2X testing sets from OPV2V, V2X-Set, and V2V4Real datasets.
+    <!-- Adjust the number of rows and columns (EVERY project differs). -->
+    <table width="100%" style="margin: 20pt 0; text-align: center;">
+      <tr>
+        <td><img src="./assets/Co_table.png" width="80%"></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<!-- === Result Section Ends === -->
+
+
+
+<!-- === Result Section Starts === -->
+<div class="section">
+  <div class="title">Qualitative Results</div>
+  <div class="body">
+    Camera-only 3D detection performance comparison. We show Average Precision (AP) at IoU=0.5 and 0.7  on the OPV2V
+    and V2XSet datasets.
+    <!-- Adjust the number of rows and columns (EVERY project differs). -->
+    <table width="100%" style="margin: 20pt 0; text-align: center;">
+      <tr>
+        <td><img src="./assets/Co_table2.png" width="55%"></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<!-- === Result Section Ends === -->
+
+
+
+
+
+<!-- === Result Section Starts === -->
+<div class="section">
+  <div class="title">Visualization of 3D detection results</div>
+  <div class="body">
+
+
+    Quantitative comparison of image quality on the nuScenes nighttime validation set
+    <table width="100%" style="margin: 20pt 0; text-align: center;">
+      <tr>
+        <td><img src="./assets/Co_results1.png" width="90%"></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<!-- === Result Section Ends === -->
+
+
+
+
+
+
+<!-- === Reference Section Starts === -->
+<div class="section">
+  <div class="bibtex">BibTeX</div>
+<pre>
+  @article{li2024comamba,
+    title={CoMamba: Real-time Cooperative Perception Unlocked with State Space Models},
+    author={Li, Jinlong and Liu, Xinyu and Li, Baolu and Xu, Runsheng and Li, Jiachen and Yu, Hongkai and Tu, Zhengzhong},
+    journal={arXiv preprint arXiv:2409.10699},
+    year={2024}
+  }
+</pre>
+
+
+  <!-- <div class="ref">Related Work</div>
+  <div class="citation">
+    <div class="image"><img src="assets/controlnet.png"></div>
+    <div class="comment">
+      <a href="https://github.com/lllyasviel/ControlNet-v1-1-nightly" target="_blank">
+        Lvmin Zhang, Anyi Rao, Maneesh Agrawala.
+        Adding Conditional Control to Text-to-Image Diffusion Models.
+        ICCV 2023.</a><br>
+      <b>Comment:</b>
+      Builds a addition encoder to add spatial conditioning controls to T2I diffusion models.
+    </div>
+  </div>
+  <div class="citation">
+    <div class="image"><img src="assets/cvpr/degrading.png"></div>
+    <div class="comment">
+      <a href="https://openaccess.thecvf.com/content/ICCV2021/papers/Cui_Multitask_AET_With_Orthogonal_Tangent_Regularity_for_Dark_Object_Detection_ICCV_2021_paper.pdf" target="_blank">
+        Ziteng Cui, Guo-Jun Qi, Lin Gu, Shaodi You, Zenghui Zhang, Tatsuya Harada.
+        Multitask AET with orthogonal tangent regularity for dark object detection.
+        ICCV 2021.</a><br>
+      <b>Comment:</b>
+      Deploys Low-Illumination Degrading Transformations for Dark Object Detection.
+    </div>  -->
+  </div>
+</div>
+
+<!-- === Reference Section Ends === -->
+
+
+</body>
+</html>
